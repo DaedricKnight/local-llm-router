@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  router:
+    build: .
+    container_name: local-llm-router
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./router.yaml:/app/router.yaml:ro
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+    restart: unless-stopped
